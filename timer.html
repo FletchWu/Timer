@@ -1,55 +1,92 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Countdown to July 29</title>
-  <style>
-    body {
-      font-family: sans-serif;
-      text-align: center;
-      padding: 40px;
-    }
-    #countdown {
-      font-size: 32px;
-      margin: 20px 0;
-    }
-    iframe {
-      width: 100%;
-      height: 80vh;
-      border: none;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Montserrat:900">
+    <title>Countdown to July 29</title>
+    <style>
+        body {
+            text-align: center;
+            font-family: 'Fjalla One', sans-serif;
+            background-color: #fff;
+        }
+
+        #timer {
+            color: #eeeeee;
+            text-align: center;
+            text-transform: uppercase;
+            font-family: 'Lato', sans-serif;
+            font-size: .7em;
+            letter-spacing: 5px;
+        }
+
+        .years, .days {
+            display: inline-block;
+            padding: 20px;
+            width: 100px;
+            border-radius: 5px;
+        }
+
+        .years {
+            background: #f9dc5c;
+            color: #183059;
+        }
+
+        .days {
+            background: #fae588;
+            color: #183059;
+        }
+
+        .numbers {
+            font-family: 'Montserrat', sans-serif;
+            color: #183059;
+            font-size: 4em;
+            text-align: center;
+        }
+
+        h3 {
+            text-align: center;
+            color: #183059;
+            font-weight: bold;
+        }
+
+        .small {
+            font-size: 15px;
+            font-weight: lighter;
+        }
+    </style>
 </head>
 <body>
 
-  <h1>⏳ Countdown to July 29</h1>
-  <div id="countdown"></div>
-
-  <!-- Embed your Looker Studio report here -->
-  <iframe src="https://lookerstudio.google.com/embed/reporting/YOUR_REPORT_ID/page/YOUR_PAGE_ID"></iframe>
-
-  <script>
-    const countdownEl = document.getElementById('countdown');
-    const targetDate = new Date("2025-07-29T00:00:00").getTime();
-
-    const interval = setInterval(() => {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-
-      if (distance < 0) {
-        clearInterval(interval);
-        countdownEl.textContent = "🎉 It's July 29!";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      countdownEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
-  </script>
+<div id="timer">
+    <h3>Countdown to July 29, 2025</h3>
+    <div class="years">
+        <div id="years" class="numbers"> </div>years</div>
+    <div class="days">
+        <div id="days" class="numbers"> </div>days</div>
+</div>
 
 </body>
+<script>
+const targetDate = new Date('July 29, 2025 00:00:00').getTime();
+
+let timer = setInterval(function () {
+    const now = new Date().getTime();
+    const diff = targetDate - now;
+
+    let years = diff / (1000 * 60 * 60 * 24 * 365.25);
+    years = Math.floor(years);
+    let days = Math.floor((diff % (1000 * 60 * 60 * 24 * 365.25)) / (1000 * 60 * 60 * 24));
+
+    document.getElementById("years").innerHTML = years;
+    document.getElementById("days").innerHTML = days;
+
+    if (diff < 0) {
+        clearInterval(timer);
+        document.getElementById("years").innerHTML = 0;
+        document.getElementById("days").innerHTML = 0;
+    }
+}, 1000);
+</script>
 </html>
